@@ -60,17 +60,20 @@ def insert_feedback(nom: str, age: int, sexe: str,feedback: str, Phone_number: s
     cursor1.execute( " INSERT INTO Client_Information(Name,Age,Sexe,Phone_number,E-mail) VALUES(%s, %s, %s, %s, %s)",
                     (nom, age, sexe, Phone_number,email ))
     
-    cursor2.execute("INSERT INTO Client_Query(Feedback) VALUES(%s)",
-                           (feedback,))
+    cursor2.execute("INSERT INTO Client_Query(Feedback,Id_client) VALUES(%s,%s)",
+                           (feedback,id_client,))
     conn.commit()
     conn.close()
     # return 
+
+
+
 
 # Mettre a jour la confidence et le sentiment
 '''
 À partir des resultats du model, mettre à jour les points de sentiment et confidence
 '''
-def Update_sent_conf(predicted_sentiment, predicted_confidence):
+def Update_sent_conf(predicted_sentiment, predicted_confidence,):
     conn= get_connection()
     cursor= conn.cursor()
     cursor.execute( "UPDATE Client_Query SET sentiment=%s, confidence=%s ",

@@ -43,17 +43,17 @@ print(classification_report(y_pred,y_test))
 joblib.dump(model, "../data/processed/model.pkl")
 
 #exemple
-def testing():
+# def testing():
 
     
-    text=input("entrez un texte ")
-    cleaned =clean_text(text)
-    vivi=vectorizer.transform([cleaned] )
-    u =model.predict(vivi)
-    return u
+#     text=input("entrez un texte ")
+#     cleaned =clean_text(text)
+#     vivi=vectorizer.transform([cleaned] )
+#     u =model.predict(vivi)
+#     return u
 
-test=testing()
-print(test)
+# test=testing()
+# print(test)
 
     
 
