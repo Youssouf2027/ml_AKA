@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import joblib
 from pydantic import BaseModel
-from database import get_new_feedback, Update_sent_conf
+from database import get_new_feedback, Update_sent_conf, insert_feedback
 
 class Feed(BaseModel):
     name: str
@@ -40,8 +40,17 @@ def back():
 async def create(feed: Feed):
     name = feed.name
     age = feed.age
-    sexe = feed.age
+    sexe = feed.sexe
     phone_number = feed.phone_number
     email = feed.Email
     feedback = feed.feedback
+
+    print(name,age,sexe,phone_number,email,feedback)
+    try:
+        insert_feedback(name,age,sexe,feedback,phone_number,email)
+        return {"message": "Feedback created successfully."}
+    except Exception as e:
+        print(e)
+        return {"message": f"Error creating feedback: {str(e)}"}
+
     

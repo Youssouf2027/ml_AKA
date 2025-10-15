@@ -52,16 +52,18 @@ def get_all_cat(conn):
 '''
 Recuperer les données entrées des formulaires et les enregistrer dans la base de données
 '''
-def insert_feedback(nom: str, age: int, sexe: str,feedback: str, Phone_number: str, email:str ):
+def insert_feedback(nom: str, age: str, sexe: str,feedback: str, Phone_number: str, email:str ):
 
     conn=get_connection()
     cursor1=conn.cursor()
     cursor2 = conn.cursor()
-    cursor1.execute( " INSERT INTO Client_Information(Name,Age,Sexe,Phone_number,E-mail) VALUES(%s, %s, %s, %s, %s)",
+    cursor1.execute( "INSERT INTO `Client_Information`(`Name`, `Age`, `Sexe`, `Phone_number`, `E-mail`) VALUES(%s, %s, %s, %s, %s)",
                     (nom, age, sexe, Phone_number,email ))
     
-    cursor2.execute("INSERT INTO Client_Query(Feedback,Id_client) VALUES(%s,%s)",
-                           (feedback,id_client,))
+    id_client = cursor1.lastrowid
+    print(id_client)
+    cursor2.execute("INSERT INTO `Client_Query`(`Id_client`, `Feedback`) VALUES(%s,%s)",
+                    (id_client,feedback))
     conn.commit()
     conn.close()
     # return 
@@ -77,6 +79,6 @@ def Update_sent_conf(predicted_sentiment, predicted_confidence,):
     conn= get_connection()
     cursor= conn.cursor()
     cursor.execute( "UPDATE Client_Query SET sentiment=%s, confidence=%s ",
-                   (predicted_sentiment, predicted_confidence))
+    (predicted_sentiment, predicted_confidence))
     
 # Testing

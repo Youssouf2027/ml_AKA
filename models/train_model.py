@@ -3,11 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report
 from sklearn.feature_extraction.text import TfidfVectorizer
-import sys
-import os 
-
-sys.path.append(os.path.abspath(".."))
-from data.preprocessing import clean_text
+import joblib
 
 # chargement du model avec joblib
 
@@ -36,25 +32,8 @@ y_pred=model.predict(X_test)
 
 print(classification_report(y_pred,y_test))
 
-
-
-
 #sauvegarde du model
 joblib.dump(model, "../data/processed/model.pkl")
 
-#exemple
-# def testing():
-
-    
-#     text=input("entrez un texte ")
-#     cleaned =clean_text(text)
-#     vivi=vectorizer.transform([cleaned] )
-#     u =model.predict(vivi)
-#     return u
-
-# test=testing()
-# print(test)
-
-    
 
 

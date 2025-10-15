@@ -11,12 +11,12 @@ def verificateur_email(Email):
 
 st.title("Interface Utilisateur")
 
-api_url = "http://127.0.0.1:3002/create_Feed"
+api_url = "http://127.0.0.1:8000/create_Feed"
 
 with st.form("feedback_form"):
     name=st.text_input("Nom:")
     age=st.text_input("Age:")
-    sexe=st.selectbox("Sexe:",["Homme","Femme"])
+    sexe=st.selectbox("Sexe:",["male","female"])
     phone_number=st.text_input("Phone_number:")
     Email=st.text_input("email:")
     feedback=st.text_area("Votre feedback:")
@@ -41,6 +41,7 @@ if submitted:
         st.error("Invalide. veuillez reessayer")
     else:
         st.success("merci pour votre feedback 🙏 ")
+        print(payload)
         try:
             response = requests.post( api_url, json=payload, headers=headers)
             response.raise_for_status()  # Raise an exception for HTTP errors
